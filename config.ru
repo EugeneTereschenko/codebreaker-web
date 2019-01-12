@@ -1,4 +1,4 @@
-require './lib/racker'
+require_relative 'autoload'
 
 use Rack::Reloader
 use Rack::Static, urls: ['/stylesheets'], root: 'public'
