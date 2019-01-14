@@ -35,7 +35,7 @@
               <div class="col text-center button">
                 <button type="button" class="btn btn-primary" disabled>
                   Attempts:
-                  <span class="badge badge-light">4</span>
+                  <span class="badge badge-light"><%= current_attempts %></span>
                 </button>
               </div>
 
@@ -65,15 +65,11 @@
               <button type="submit" class="btn btn-primary btn-lg">
                 Submit
               </button>
-              <a class="btn btn-warning btn-lg float-right" role="button">
+              <a href="/show_hints" class="btn btn-warning btn-lg float-right" role="button">
                 Show hint!
-                <span class="badge badge-light">
-                  6
-                </span>
-                <span class="badge badge-light">
-                  3
-                </span>
               </a>
+              <span class="badge badge-light">
+                </span>
             </form>
           </div>
         </div>

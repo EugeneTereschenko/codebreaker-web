@@ -16,6 +16,7 @@ class Racker
     when '/rules' then
       Rack::Response.new(render('rules.html'))
     when '/game' then new_game
+    when '/show_hints' then show_hints
     when '/stat' then
       Rack::Response.new(render('statistics.html'))
     else
@@ -31,10 +32,26 @@ class Racker
       @game = Codebreaker::Game.new
       @game.new_game
       @game.enter_level(@request.params['level'])
+      #@hints_array = @game.hints_index
+      #@hints = @game.secret_code[@hints_array.shift]
+      #@request.session[:game] = @game
+      #@hints = @game.show_hints
       @request.session[:game] = @game
+      #@hints = @request.session[:game].show_hints
       Rack::Response.new(render('game.html'))
   end
 
+  def show_hints
+    @game = @request.session[:game]
+    #Rack::Response.new(render('menu.html'))
+    #@hints = @request.session[:game].show_hints
+    #@hints = @game.show_hints
+  end
+
+  def current_attempts
+    @request.session[:game].attempts
+  end
+  
   def current_hints
     @request.session[:game].hints
   end
