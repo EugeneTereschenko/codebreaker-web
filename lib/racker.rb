@@ -29,43 +29,43 @@ class Racker
   end
 
   def new_game
-      @game = Codebreaker::Game.new
-      @game.new_game
-      @game.enter_level(@request.params['level'])
+      #@game = Codebreaker::Game.new
+     # @game.new_game
+     # @game.enter_level(@request.params['level'])
       #@hints_array = @game.hints_index
       #@hints = @game.secret_code[@hints_array.shift]
       #@request.session[:game] = @game
       #@hints = @game.show_hints
-      @request.session[:game] = @game
+     # @request.session[:game] = @game
       #@hints = @request.session[:game].show_hints
       Rack::Response.new(render('game.html'))
   end
 
   def show_hints
-    @game = @request.session[:game]
+   # @game = @request.session[:game]
     #Rack::Response.new(render('menu.html'))
     #@hints = @request.session[:game].show_hints
     #@hints = @game.show_hints
   end
 
   def current_attempts
-    @request.session[:game].attempts
+    #@request.session[:game].attempts
   end
   
   def current_hints
-    @request.session[:game].hints
+    #@request.session[:game].hints
   end
 
   def current_level
-    @request.params['level']
+    #@request.params['level']
   end
 
   def current_secret_code
-    @request.session[:game].secret_code
+    #@request.session[:game].secret_code
   end
 
   def current_player
-    @request.params['player_name']
+    #@request.params['player_name']
   end
 
   def render(template)
