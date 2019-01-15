@@ -5,6 +5,7 @@ gem 'bundler', '~> 1.16.1'
 gem 'codebreaker-rg-te', '~> 0.1.13'
 gem 'pry', group: :development
 gem 'rack'
+gem 'i18n'
 
 group :test do
   gem 'rack-test'
