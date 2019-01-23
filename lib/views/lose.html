@@ -7,7 +7,7 @@
 <link href="assets/css/styles.css" rel="stylesheet">
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
-<title>Codebreaker Web</title>
+<title><%= I18n.t(:codebreak) %></title>
 
 <body>
   <section id="introduction">
@@ -16,25 +16,25 @@
         <div class="col-12 col-md-6">
           <div class="row">
             <div class="col-md-auto">
-              <h1 class="text-white title inline-block">Codebreaker 2018</h1>
+              <h1 class="text-white title inline-block"><%= I18n.t(:codebreak_year) %></h1>
             </div>
           </div>
           <div class="row">
             <div class="col button">
               <button type="button" class="btn btn-primary" disabled>
-                Level:
+                <%= I18n.t(:level) %>
                 <span class="badge badge-light">
-                  Middle
+                <%= I18n.t(:middle) %>
                 </span>
               </button>
               <button type="button" class="btn btn-primary" disabled>
-                Attempts Left:
+                <%= I18n.t(:attempt_stat) %>
                 <span class="badge badge-light">
                   0/8
                 </span>
               </button>
               <button type="button" class="btn btn-primary" disabled>
-                Hints Left:
+                <%= I18n.t(:hints_stat) %>
                 <span class="badge badge-light">
                   1/3
                 </span>
@@ -46,10 +46,10 @@
             <div class="text-center">
               <div class="text-center">
                 <h3 class="text-white">
-                  Oops, NAME! You lose the game!
+                  <%= I18n.t(:name_lose) %>
                 </h3>
                 <h4 class="text-white">
-                  The code was
+                  <%= I18n.t(:code_was) %>
                   <strong>1553</strong>
                 </h4>
               </div>
@@ -58,10 +58,10 @@
           </div>
           <hr class="mb-4">
           <a class="btn btn-primary btn-lg" href="#" role="button">
-            Play again!
+              <%= I18n.t(:play_again) %>
           </a>
           <a class="btn btn-success btn-lg float-right" href="#" role="button">
-            Statistics
+              <%= I18n.t(:stat) %>
           </a>
         </div>
        </div>

@@ -1,2 +1,5 @@
 #require 'codebreaker'
+require 'i18n'
+require 'yaml'
+require './lib/locale/localization.rb'
 require './lib/racker.rb'

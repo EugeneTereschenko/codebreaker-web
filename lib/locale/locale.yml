@@ -1,0 +1,65 @@
+en:
+  codebreak:
+    "Codebreaker Web"
+  codebreak_year:
+    "Codebreaker 2018"
+  hello_name:
+    "Hello, You name"
+  guess_number:
+    "Try to guess 4-digit number, that consists of numbers in a range from 1 to 6."
+  level:
+    "Level:"
+  attempts:
+    "Attempts:"
+  hints:
+    "Hints:"
+  submit:
+    "Submit"
+  show_hint:
+    "Show hint!"
+  player_name:
+    "Player's name:"
+  game_level:
+    "Game level:"
+  choose_game_level:
+    "Choose game level..."
+  simple:
+    "Simple"
+  middle:
+    "Middle"
+  hard:
+    "Hard"
+  start_game:
+    "Start the game!"
+  rules:
+    "Rules"
+  statistics:
+    "Statistics"
+  rules_test:
+    "Rules TEST"
+  top_of_player:
+    "Top of Players:"
+  name_stat:
+    "Name"
+  level_stat:
+    "Level"
+  attempt_stat:
+    "Attempts Left"
+  hints_stat:
+    "Hints Left"
+  date_stat:
+    "Date"
+  home_stat:
+    "Home"
+  won:
+    "Congratulations, NAME! You won the game!"
+  play_again:
+    "Play again!"
+  stat:
+    "Statistics"
+  name_lose:
+    "Oops, NAME! You lose the game!"
+  code_was:
+    "The code was"
+  play_again:
+    "Play again!"
