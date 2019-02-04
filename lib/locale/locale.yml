@@ -52,13 +52,13 @@ en:
   home_stat:
     "Home"
   won:
-    "Congratulations, NAME! You won the game!"
+    "Congratulations, %{name}! You won the game!"
   play_again:
     "Play again!"
   stat:
     "Statistics"
   name_lose:
-    "Oops, NAME! You lose the game!"
+    "Oops, %{name}! You lose the game!"
   code_was:
     "The code was"
   play_again:

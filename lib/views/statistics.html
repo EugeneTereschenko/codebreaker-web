@@ -37,38 +37,16 @@
                 </tr>
               </thead>
               <tbody>
+                <% @data_stat.each_with_index do |status, index| %>
                 <tr>
-                  <th scope="row">1</th>
-                  <td>Player 1</td>
-                  <td>Middle</td>
-                  <td>8/10</td>
-                  <td>3/3</td>
-                  <td>2018.12.04 - 17:00:01</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Player 1</td>
-                  <td>Middle</td>
-                  <td>8/10</td>
-                  <td>3/3</td>
-                  <td>2018.12.04 - 17:00:01</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Player 1</td>
-                  <td>Middle</td>
-                  <td>8/10</td>
-                  <td>3/3</td>
-                  <td>2018.12.04 - 17:00:01</td>
-                </tr>
-                <tr>
-                  <th scope="row">4</th>
-                  <td>Player 1</td>
-                  <td>Middle</td>
-                  <td>8/10</td>
-                  <td>3/3</td>
-                  <td>2018.12.04 - 17:00:01</td>
-                </tr>
+                    <th scope="row"><%= index + 1 %></th>
+                    <td><%= status[:name] %></td>
+                    <td><%= status[:level] %></td>
+                    <td><%= status[:attempts_used] %>/<%= status[:attempts] %></td>
+                    <td><%= status[:hints_used] %>/<%= status[:hints] %></td>
+                    <td><%= status[:game_date] %></td>
+                 </tr>                 
+                <% end %>
               </tbody>
             </table>
           </div>

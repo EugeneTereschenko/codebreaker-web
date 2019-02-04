@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'codebreaker-rg-te', '~> 0.1.14'
+gem 'codebreaker-rg-te', '~> 0.1.21'
 gem 'pry', group: :development
 gem 'rack'
 gem 'i18n'

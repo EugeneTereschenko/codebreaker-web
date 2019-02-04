@@ -24,19 +24,19 @@
               <button type="button" class="btn btn-primary" disabled>
                 <%= I18n.t(:level) %>
                 <span class="badge badge-light">
-                <%= I18n.t(:middle) %>
+                <%= current_level %>
                 </span>
               </button>
               <button type="button" class="btn btn-primary" disabled>
                 <%= I18n.t(:attempt_stat) %>
                 <span class="badge badge-light">
-                  0/8
+                <%= current_attempts %>
                 </span>
               </button>
               <button type="button" class="btn btn-primary" disabled>
                 <%= I18n.t(:hints_stat) %>
                 <span class="badge badge-light">
-                  1/3
+                <%= current_hints %>
                 </span>
               </button>
             </div>
@@ -46,21 +46,21 @@
             <div class="text-center">
               <div class="text-center">
                 <h3 class="text-white">
-                  <%= I18n.t(:name_lose) %>
+                  <%= I18n.t(:name_lose, name: @request.session[:game].name) %>
                 </h3>
                 <h4 class="text-white">
                   <%= I18n.t(:code_was) %>
-                  <strong>1553</strong>
+                  <strong><%= @request.session[:game].secret_code.join %></strong>
                 </h4>
               </div>
               <img src="assets/images/lost.gif" class="img-fluid" alt="You lose the game!">
             </div>
           </div>
           <hr class="mb-4">
-          <a class="btn btn-primary btn-lg" href="#" role="button">
+          <a class="btn btn-primary btn-lg" href="/" role="button">
               <%= I18n.t(:play_again) %>
           </a>
-          <a class="btn btn-success btn-lg float-right" href="#" role="button">
+          <a class="btn btn-success btn-lg float-right" href="/stat" role="button">
               <%= I18n.t(:stat) %>
           </a>
         </div>
