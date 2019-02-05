@@ -2,7 +2,7 @@ en:
   codebreak:
     "Codebreaker Web"
   codebreak_year:
-    "Codebreaker 2018"
+    "Codebreaker 2019"
   hello_name:
     "Hello, You name"
   guess_number:
@@ -24,11 +24,11 @@ en:
   choose_game_level:
     "Choose game level..."
   simple:
-    "Simple"
+    "Simple - 15 attempts - 3 hints"
   middle:
-    "Middle"
+    "Middle - 10 attempts - 2 hints"
   hard:
-    "Hard"
+    "Hard - 5 attempts - 1 hints"
   start_game:
     "Start the game!"
   rules:
@@ -36,7 +36,7 @@ en:
   statistics:
     "Statistics"
   rules_test:
-    "Rules TEST"
+    "Try to guess 4-digit number, that consists of numbers in a range from 1 to 6."
   top_of_player:
     "Top of Players:"
   name_stat:
