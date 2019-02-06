@@ -44,10 +44,13 @@ class Racker
       @game.new_game
       @game.enter_level(@request.params['level'])
       @game.enter_name(@request.params['player_name'])
-      @game.save 
+      
       #@hints_array = @game.hints_index
       #@hints = @game.secret_code[@hints_array.shift]
       @request.session[:game] = @game
+      @request.session[:array_hints] = Array.new()
+      @request.session[:used_attempts] = @request.session[:game].attempts
+      @request.session[:used_hints] = @request.session[:game].hints
       #@hints = @game.show_hints
       #@request.session[:game] = @game
       #@hints = @request.session[:game].show_hints
@@ -59,6 +62,7 @@ class Racker
   end
 
   def win
+    @request.session[:game].save 
     Rack::Response.new(render('win.html')) do
       destroy_session
     end
@@ -84,9 +88,9 @@ class Racker
   def show_hints
     #@game = @request.session[:game]
     #Rack::Response.new(render('menu.html'))
+    @request.session[:game].take_hints
     @hints = @request.session[:game].show_hints
-    @arr_hints.push(@hints)
-    @show_hints_array = @arr_hints.join(', ')
+    @request.session[:array_hints].push(@hints)
     Rack::Response.new(render('game.html'))
   end
 
