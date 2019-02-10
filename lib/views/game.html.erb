@@ -59,13 +59,13 @@
           </div>
           <hr class="mb-4">
 
-          <form method="post" action="http://localhost:9292/submit_answer">
+          <form method="post" action="/submit_answer">
             <div class="form-group">
               <input class="form-control guess_input" name="number" pattern="^[1-6]{4}$" required=""
               <% if @request.session[:game].user_code.nil? %>
               placeholder="1234"
               <% else %>
-              placeholder = <%= @request.params['number'] %>
+              placeholder = <%= @request.session[:number] %>
               <% end %>
               autocomplete="off">
             </div>

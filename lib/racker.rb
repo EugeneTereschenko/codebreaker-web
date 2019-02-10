@@ -37,6 +37,7 @@ class Racker
   end
 
   def start
+    return Rack::Response.new(render('game.html.erb')) if @request.session.has_key?(:game)
     Rack::Response.new(render('menu.html.erb'))
   end
 
@@ -71,6 +72,7 @@ class Racker
 
   def submit_answer
     @request.session[:game].handle_guess(@request.params['number'])
+    @request.session[:number] = @request.params['number']
     @request.session[:game_result] = @request.session[:game].game_result
 
     return win if @request.session[:game].equal_codes?(@request.params['number'])
@@ -91,7 +93,4 @@ class Racker
     ERB.new(File.read(path)).result(binding)
   end
 
-  def word
-    @request.cookies['word'] || 'Nothing'
-  end
 end
