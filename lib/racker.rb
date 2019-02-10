@@ -37,7 +37,8 @@ class Racker
   end
 
   def start
-    return Rack::Response.new(render('game.html.erb')) if @request.session.has_key?(:game)
+    return Rack::Response.new(render('game.html.erb')) if @request.session.key?(:game)
+
     Rack::Response.new(render('menu.html.erb'))
   end
 
@@ -92,5 +93,4 @@ class Racker
     path = File.expand_path("../views/#{template}", __FILE__)
     ERB.new(File.read(path)).result(binding)
   end
-
 end
