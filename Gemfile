@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
-gem 'codebreaker-rg-te', '~> 0.1.21'
+gem 'codebreaker-rg-te', '~> 0.1.22'
+gem 'i18n'
 gem 'pry', group: :development
 gem 'rack'
-gem 'i18n'
 
 group :test do
   gem 'rack-test'

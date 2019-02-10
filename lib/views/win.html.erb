@@ -24,19 +24,19 @@
               <button type="button" class="btn btn-primary" disabled>
                 <%= I18n.t(:level) %>
                 <span class="badge badge-light">
-                <%= current_level %>
+                <%= @request.session[:game].level %>
                 </span>
               </button>
               <button type="button" class="btn btn-primary" disabled>
                 <%= I18n.t(:attempt_stat) %>
                 <span class="badge badge-light">
-                <%= current_attempts %>
+                <%= @request.session[:game].attempts %>
                 </span>
               </button>
               <button type="button" class="btn btn-primary" disabled>
                 <%= I18n.t(:hints_stat) %>
                 <span class="badge badge-light">
-                <%= current_hints %>
+                <%= @request.session[:game].hints %>
                 </span>
               </button>
             </div>
@@ -46,22 +46,18 @@
             <div class="text-center">
               <div class="text-center">
                 <h3 class="text-white">
-                  <%= I18n.t(:name_lose, name: @request.session[:game].name) %>
+                  <%= I18n.t(:won, name: @request.session[:game].name) %>
                 </h3>
-                <h4 class="text-white">
-                  <%= I18n.t(:code_was) %>
-                  <strong><%= @request.session[:game].secret_code.join %></strong>
-                </h4>
               </div>
-              <img src="assets/images/lost.gif" class="img-fluid" alt="You lose the game!">
+              <img src="assets/images/won.gif" class="img-fluid" alt="You won the game!">
             </div>
           </div>
           <hr class="mb-4">
           <a class="btn btn-primary btn-lg" href="/" role="button">
-              <%= I18n.t(:play_again) %>
+            <%= I18n.t(:play_again) %>
           </a>
           <a class="btn btn-success btn-lg float-right" href="/stat" role="button">
-              <%= I18n.t(:stat) %>
+            <%= I18n.t(:stat) %>
           </a>
         </div>
        </div>

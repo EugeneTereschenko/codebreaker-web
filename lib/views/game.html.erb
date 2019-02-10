@@ -25,7 +25,7 @@
           </div>
           <p class="lead text-white-70">
             <%= I18n.t(:hello_name) %> '
-            <%= current_player %>'
+            <%= @request.session[:game].name %>'
             <%= I18n.t(:guess_number) %>
           </p>
           <hr class="mb-4">
@@ -34,8 +34,7 @@
               <button type="button" class="btn btn-primary" disabled>
                 <%= I18n.t(:level) %>
                 <span class="badge badge-light">
-                  '
-                  <%= current_level %>'
+                  '<%= @request.session[:game].level %>'
                 </span>
               </button>
             </div>
@@ -43,17 +42,17 @@
               <button type="button" class="btn btn-primary" disabled>
                 <%= I18n.t(:attempts) %>
                 <span class="badge badge-light">
-                  <%= current_attempts %>/
+                  <%= @request.session[:game].attempts %>/
                   <%= @request.session[:used_attempts] %></span>
               </button>
             </div>
 
             <div class="col button">
-              <button type="button" class="btn btn-primary float-right">
+              <button type="button" class="btn btn-primary float-right" disabled>
                 <%= I18n.t(:hints) %>
                 <%= @game_sport %>
                 <span class="badge badge-light">
-                  <%= current_hints %>/
+                  <%= @request.session[:game].hints %>/
                   <%= @request.session[:used_hints] %></span>
               </button>
             </div>
@@ -66,27 +65,27 @@
               <% if @request.session[:game].user_code.nil? %>
               placeholder="1234"
               <% else %>
-              placeholder = <%= @request.session[:game].user_code.join %>
+              placeholder = <%= @request.params['number'] %>
               <% end %>
               autocomplete="off">
             </div>
             <div class="form-group guess_markers_list">
               <div id="guess_marker">
                 <% if @request.session[:game_result].nil? %>
-                <% 4.times do %>
-                <button type="button" class="btn btn-danger marks" disabled>x</button>
-                <% end %>
+                    <% 4.times do %>
+                    <button type="button" class="btn btn-danger marks" disabled>x</button>
+                    <% end %>
                 <% else %>
-                <% @request.session[:game_result].split('').each do |n| %>
-                <% if n == '+'%> <button type="button" class="btn btn-success marks" disabled>+</button>
-                <% elsif n == '-'%> <button type="button" class="btn btn-primary marks" disabled>-</button>
-                <% end %>
-                <% end %>
-                <% for i in 0..3 do %>
-                <% unless @request.session[:game_result].split('')[i] %><button type="button" class="btn btn-danger marks"
-                  disabled>x</button>
-                <% end %>
-                <% end %>
+                    <% @request.session[:game_result].split('').each do |n| %>
+                        <% if n == '+'%> <button type="button" class="btn btn-success marks" disabled>+</button>
+                        <% elsif n == '-'%> <button type="button" class="btn btn-primary marks" disabled>-</button>
+                      <% end %>
+                    <% end %>
+                    <% for i in 0..3 do %>
+                    <% unless @request.session[:game_result].split('')[i] %><button type="button" class="btn btn-danger marks"
+                      disabled>x</button>
+                    <% end %>
+                  <% end %>
                 <% end %>
               </div>
             </div>
@@ -103,8 +102,8 @@
                 <%= I18n.t(:show_hint) %>
                 <% unless @request.session[:array_hints].empty? %>
                 <span class="badge badge-light">
-                  <% @request.session[:array_hints].each do |el| %>
-                  <%= el %>
+                  <% @request.session[:array_hints].each do |l| %>
+                  <%= l %>
                   <% end %>
                   <% end %>
                 </span>

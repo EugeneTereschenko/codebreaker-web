@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'erb'
 require 'codebreaker'
 
 class Racker
-
   attr_reader :game, :arr_hints
   def self.call(env)
     new(env).response.finish
@@ -17,7 +18,7 @@ class Racker
     case @request.path
     when '/' then start
     when '/rules' then
-      Rack::Response.new(render('rules.html'))
+      Rack::Response.new(render('rules.html.erb'))
     when '/game' then new_game
     when '/show_hints' then show_hints
     when '/stat' then  stat
@@ -25,36 +26,30 @@ class Racker
     when '/win' then win
     when '/lose' then lose
     else
-      Rack::Response.new('Not Found', 404)
+      Rack::Response.new(I18n.t('not_found'), 404)
     end
   end
 
   def stat
     @stat = Codebreaker::Statistics.new
     @data_stat = @stat.stats
-    Rack::Response.new(render('statistics.html'))
+    Rack::Response.new(render('statistics.html.erb'))
   end
 
   def start
-    Rack::Response.new(render('menu.html'))
+    Rack::Response.new(render('menu.html.erb'))
   end
 
   def new_game
-      @game = Codebreaker::Game.new
-      @game.new_game
-      @game.enter_level(@request.params['level'])
-      @game.enter_name(@request.params['player_name'])
-      
-      #@hints_array = @game.hints_index
-      #@hints = @game.secret_code[@hints_array.shift]
-      @request.session[:game] = @game
-      @request.session[:array_hints] = Array.new()
-      @request.session[:used_attempts] = @request.session[:game].attempts
-      @request.session[:used_hints] = @request.session[:game].hints
-      #@hints = @game.show_hints
-      #@request.session[:game] = @game
-      #@hints = @request.session[:game].show_hints
-      Rack::Response.new(render('game.html'))
+    @game = Codebreaker::Game.new
+    @game.new_game
+    @game.enter_level(@request.params['level'])
+    @game.enter_name(@request.params['player_name'])
+    @request.session[:game] = @game
+    @request.session[:array_hints] = []
+    @request.session[:used_attempts] = @request.session[:game].attempts
+    @request.session[:used_hints] = @request.session[:game].hints
+    Rack::Response.new(render('game.html.erb'))
   end
 
   def destroy_session
@@ -62,66 +57,41 @@ class Racker
   end
 
   def win
-    @request.session[:game].save 
-    Rack::Response.new(render('win.html')) do
+    @request.session[:game].save
+    Rack::Response.new(render('win.html.erb')) do
       destroy_session
     end
   end
 
   def lose
-    Rack::Response.new(render('lose.html')) do
+    Rack::Response.new(render('lose.html.erb')) do
       destroy_session
     end
   end
 
   def submit_answer
-    puts @request.session[:game]
     @request.session[:game].handle_guess(@request.params['number'])
     @request.session[:game_result] = @request.session[:game].game_result
-    puts @request.session[:game].secret_code
 
     return win if @request.session[:game].equal_codes?(@request.params['number'])
     return lose unless @request.session[:game].attempts.positive?
-    Rack::Response.new(render('game.html'))
+
+    Rack::Response.new(render('game.html.erb'))
   end
 
   def show_hints
-    #@game = @request.session[:game]
-    #Rack::Response.new(render('menu.html'))
     @request.session[:game].take_hints
     @hints = @request.session[:game].show_hints
     @request.session[:array_hints].push(@hints)
-    Rack::Response.new(render('game.html'))
-  end
-
-  def current_attempts
-    @request.session[:game].attempts
-  end
-  
-  def current_hints
-    @request.session[:game].hints
-  end
-
-  def current_level
-    @request.session[:game].level
-  end
-
-  def current_secret_code
-    @request.session[:game].secret_code
-  end
-
-  def current_player
-    @request.session[:game].name
+    Rack::Response.new(render('game.html.erb'))
   end
 
   def render(template)
-    path = File.expand_path("../views/#{template}",
-      __FILE__)
+    path = File.expand_path("../views/#{template}", __FILE__)
     ERB.new(File.read(path)).result(binding)
   end
 
   def word
     @request.cookies['word'] || 'Nothing'
   end
-
 end

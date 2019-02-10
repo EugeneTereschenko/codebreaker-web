@@ -75,3 +75,5 @@ en:
     "The code was"
   play_again:
     "Play again!"
+  not_found:
+    "Not Found"
