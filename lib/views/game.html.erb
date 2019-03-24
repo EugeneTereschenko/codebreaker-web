@@ -43,7 +43,7 @@
                 <%= Codebreaker::Game.message(:attempts) %>
                 <span class="badge badge-light">
                   <%= @request.session[:game].attempts %>/
-                  <%= @request.session[:used_attempts] %></span>
+                  <%= Codebreaker::Game::GAME_LEVELS.dig(@request.session[:game].level.to_sym, :attempts) %></span>
               </button>
             </div>
 
@@ -53,7 +53,7 @@
                 <%= @game_sport %>
                 <span class="badge badge-light">
                   <%= @request.session[:game].hints %>/
-                  <%= @request.session[:used_hints] %></span>
+                  <%= Codebreaker::Game::GAME_LEVELS.dig(@request.session[:game].level.to_sym, :hints) %></span>
               </button>
             </div>
           </div>

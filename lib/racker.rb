@@ -49,8 +49,6 @@ class Racker
     @game.enter_name(@request.params['player_name'])
     @request.session[:game] = @game
     @request.session[:array_hints] = []
-    @request.session[:used_attempts] = @request.session[:game].attempts
-    @request.session[:used_hints] = @request.session[:game].hints
     render_response('game.html.erb')
   end
 
