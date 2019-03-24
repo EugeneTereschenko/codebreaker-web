@@ -8,7 +8,7 @@
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <title>
-  <%= I18n.t(:codebreak) %>
+  <%= Codebreaker::Game.message(:codebreak) %>
 </title>
 
 <body>
@@ -18,12 +18,12 @@
         <div class="col-12 col-md-6">
             <div class="text-white">
               <p class="lead text-white-70">
-                <%= I18n.t(:rules_test) %>
+                <%= Codebreaker::Game.message(:rules_test) %>
               </p>
               <hr class="mb-4">
               <div class="text-center">
                 <a class="btn btn-primary btn-lg" href="/" role="button">
-                <%= I18n.t(:home_stat) %>
+                <%= Codebreaker::Game.message(:home_stat) %>
                 </a>
                 </div>
             </div>

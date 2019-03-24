@@ -7,7 +7,7 @@
 <link href="assets/css/styles.css" rel="stylesheet">
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
-<title><%= I18n.t(:codebreak) %></title>
+<title><%= Codebreaker::Game.message(:codebreak) %></title>
 
 <body>
   <section id="introduction">
@@ -16,25 +16,25 @@
         <div class="col-12 col-md-6">
           <div class="row">
             <div class="col-md-auto">
-              <h1 class="text-white title inline-block"><%= I18n.t(:codebreak_year) %></h1>
+              <h1 class="text-white title inline-block"><%= Codebreaker::Game.message(:codebreak_year) %></h1>
             </div>
           </div>
           <div class="row">
             <div class="col button">
               <button type="button" class="btn btn-primary" disabled>
-                <%= I18n.t(:level) %>
+                <%= Codebreaker::Game.message(:level) %>
                 <span class="badge badge-light">
                 <%= @request.session[:game].level %>
                 </span>
               </button>
               <button type="button" class="btn btn-primary" disabled>
-                <%= I18n.t(:attempt_stat) %>
+                <%= Codebreaker::Game.message(:attempt_stat) %>
                 <span class="badge badge-light">
                 <%= @request.session[:game].attempts %>
                 </span>
               </button>
               <button type="button" class="btn btn-primary" disabled>
-                <%= I18n.t(:hints_stat) %>
+                <%= Codebreaker::Game.message(:hints_stat) %>
                 <span class="badge badge-light">
                 <%= @request.session[:game].hints %>
                 </span>
@@ -46,7 +46,7 @@
             <div class="text-center">
               <div class="text-center">
                 <h3 class="text-white">
-                  <%= I18n.t(:won, name: @request.session[:game].name) %>
+                  <%= Codebreaker::Game.message(:won, name: @request.session[:game].name) %>
                 </h3>
               </div>
               <img src="assets/images/won.gif" class="img-fluid" alt="You won the game!">
@@ -54,10 +54,10 @@
           </div>
           <hr class="mb-4">
           <a class="btn btn-primary btn-lg" href="/" role="button">
-            <%= I18n.t(:play_again) %>
+            <%= Codebreaker::Game.message(:play_again) %>
           </a>
           <a class="btn btn-success btn-lg float-right" href="/stat" role="button">
-            <%= I18n.t(:stat) %>
+            <%= Codebreaker::Game.message(:stat) %>
           </a>
         </div>
        </div>

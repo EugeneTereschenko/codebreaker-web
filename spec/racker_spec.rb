@@ -8,22 +8,23 @@ RSpec.describe Racker do
     before { get '/rules' }
 
     it { expect(last_response).to be_ok }
-    it { expect(last_response.body).to include I18n.t(:rules_test) }
+    it { expect(last_response.body).to include Codebreaker::Game.message(:rules_test) }
   end
 
   context 'unknown path' do
     before { get '/unknown' }
 
+    puts Codebreaker::Game.message(:not_found)
     it { expect(last_response).to be_not_found }
-    it { expect(last_response.body).to include I18n.t(:not_found) }
+    it { expect(last_response.body).to include Codebreaker::Game.message(:not_found) }
   end
 
   context 'statistics path' do
     before { get '/stat' }
 
     it { expect(last_response).to be_ok }
-    it { expect(last_response.body).to include I18n.t(:codebreak_year) }
-    it { expect(last_response.body).to include I18n.t(:top_of_player) }
+    it { expect(last_response.body).to include Codebreaker::Game.message(:codebreak_year) }
+    it { expect(last_response.body).to include Codebreaker::Game.message(:top_of_player) }
   end
 
   context 'game' do
@@ -43,7 +44,7 @@ RSpec.describe Racker do
       game.enter_name('Test')
       env 'rack.session', game: game
       post '/submit_answer', number: game.secret_code.join
-      expect(last_response.body).to include I18n.t(:won, name: 'Test')
+      expect(last_response.body).to include Codebreaker::Game.message(:won, name: 'Test')
     end
   end
 
@@ -51,8 +52,8 @@ RSpec.describe Racker do
     before { get '/' }
 
     it { expect(last_response).to be_ok }
-    it { expect(last_response.body).to include I18n.t(:codebreak_year) }
-    it { expect(last_response.body).to include I18n.t(:guess_number) }
+    it { expect(last_response.body).to include Codebreaker::Game.message(:codebreak_year) }
+    it { expect(last_response.body).to include Codebreaker::Game.message(:guess_number) }
   end
 
   context 'win' do
@@ -63,7 +64,7 @@ RSpec.describe Racker do
       env 'rack.session', game: game
       get '/win'
       expect(last_response).to be_ok
-      expect(last_response.body).to include I18n.t(:won, name: 'Test')
+      expect(last_response.body).to include Codebreaker::Game.message(:won, name: 'Test')
     end
   end
 
@@ -75,7 +76,7 @@ RSpec.describe Racker do
       env 'rack.session', game: game
       get '/lose'
       expect(last_response).to be_ok
-      expect(last_response.body).to include I18n.t(:name_lose, name: 'Test')
+      expect(last_response.body).to include Codebreaker::Game.message(:name_lose, name: 'Test')
     end
   end
 end

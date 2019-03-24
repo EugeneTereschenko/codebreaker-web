@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'codebreaker-rg-te', '~> 0.1.22'
+gem 'codebreaker-rg-te', '~> 0.1.28'
 gem 'i18n'
 gem 'pry', group: :development
 gem 'rack'

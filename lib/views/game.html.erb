@@ -8,7 +8,7 @@
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <title>
-  <%= I18n.t(:codebreak) %>
+  <%= Codebreaker::Game.message(:codebreak) %>
 </title>
 
 <body>
@@ -19,20 +19,20 @@
           <div class="row">
             <div class="col-md-auto">
               <h1 class="text-white title">
-                <%= I18n.t(:codebreak_year) %>
+                <%= Codebreaker::Game.message(:codebreak_year) %>
               </h1>
             </div>
           </div>
           <p class="lead text-white-70">
-            <%= I18n.t(:hello_name) %> '
+            <%= Codebreaker::Game.message(:hello_name) %> '
             <%= @request.session[:game].name %>'
-            <%= I18n.t(:guess_number) %>
+            <%= Codebreaker::Game.message(:guess_number) %>
           </p>
           <hr class="mb-4">
           <div class="row">
             <div class="col button">
               <button type="button" class="btn btn-primary" disabled>
-                <%= I18n.t(:level) %>
+                <%= Codebreaker::Game.message(:level) %>
                 <span class="badge badge-light">
                   '<%= @request.session[:game].level %>'
                 </span>
@@ -40,7 +40,7 @@
             </div>
             <div class="col text-center button">
               <button type="button" class="btn btn-primary" disabled>
-                <%= I18n.t(:attempts) %>
+                <%= Codebreaker::Game.message(:attempts) %>
                 <span class="badge badge-light">
                   <%= @request.session[:game].attempts %>/
                   <%= @request.session[:used_attempts] %></span>
@@ -49,7 +49,7 @@
 
             <div class="col button">
               <button type="button" class="btn btn-primary float-right" disabled>
-                <%= I18n.t(:hints) %>
+                <%= Codebreaker::Game.message(:hints) %>
                 <%= @game_sport %>
                 <span class="badge badge-light">
                   <%= @request.session[:game].hints %>/
@@ -92,14 +92,14 @@
             <hr class="mb-4">
 
             <button type="submit" class="btn btn-primary btn-lg">
-              <%= I18n.t(:submit) %>
+              <%= Codebreaker::Game.message(:submit) %>
             </button>
             <% if @request.session[:game].hints.positive? %>
             <a href="/show_hints" class="btn btn-warning btn-lg float-right" role="button">
               <% else %>
               <a href="/show_hints" class="btn btn-warning btn-lg float-right disabled" role="button">
                 <% end %>
-                <%= I18n.t(:show_hint) %>
+                <%= Codebreaker::Game.message(:show_hint) %>
                 <% unless @request.session[:array_hints].empty? %>
                 <span class="badge badge-light">
                   <% @request.session[:array_hints].each do |l| %>
