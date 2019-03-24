@@ -18,7 +18,7 @@ class Racker
     case @request.path
     when '/' then start
     when '/rules' then
-      Rack::Response.new(render('rules.html.erb'))
+      render_response('rules.html.erb')
     when '/game' then new_game
     when '/show_hints' then show_hints
     when '/stat' then  stat
@@ -26,20 +26,20 @@ class Racker
     when '/win' then win
     when '/lose' then lose
     else
-      Rack::Response.new(I18n.t('not_found'), 404)
+      render_response('notfound.html.erb')
     end
   end
 
   def stat
     @stat = Codebreaker::Statistics.new('./data/stat.yml')
     @data_stat = @stat.stats
-    Rack::Response.new(render('statistics.html.erb'))
+    render_response('statistics.html.erb')
   end
 
   def start
-    return Rack::Response.new(render('game.html.erb')) if @request.session.key?(:game)
+    return render_response('game.html.erb') if @request.session.key?(:game)
 
-    Rack::Response.new(render('menu.html.erb'))
+    render_response('menu.html.erb')
   end
 
   def new_game
@@ -51,7 +51,7 @@ class Racker
     @request.session[:array_hints] = []
     @request.session[:used_attempts] = @request.session[:game].attempts
     @request.session[:used_hints] = @request.session[:game].hints
-    Rack::Response.new(render('game.html.erb'))
+    render_response('game.html.erb')
   end
 
   def destroy_session
@@ -60,13 +60,13 @@ class Racker
 
   def win
     @request.session[:game].save('./data/stat.yml')
-    Rack::Response.new(render('win.html.erb')) do
+    render_response('win.html.erb') do
       destroy_session
     end
   end
 
   def lose
-    Rack::Response.new(render('lose.html.erb')) do
+    render_response('lose.html.erb') do
       destroy_session
     end
   end
@@ -79,18 +79,22 @@ class Racker
     return win if @request.session[:game].equal_codes?(@request.params['number'])
     return lose unless @request.session[:game].attempts.positive?
 
-    Rack::Response.new(render('game.html.erb'))
+    render_response('game.html.erb')
   end
 
   def show_hints
     @request.session[:game].take_hints
     @hints = @request.session[:game].show_hints
     @request.session[:array_hints].push(@hints)
-    Rack::Response.new(render('game.html.erb'))
+    render_response('game.html.erb')
   end
 
   def render(template)
     path = File.expand_path("../views/#{template}", __FILE__)
     ERB.new(File.read(path)).result(binding)
+  end
+
+  def render_response(template)
+    Rack::Response.new(render(template))
   end
 end
