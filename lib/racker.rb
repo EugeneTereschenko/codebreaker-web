@@ -31,7 +31,7 @@ class Racker
   end
 
   def stat
-    @stat = Codebreaker::Statistics.new
+    @stat = Codebreaker::Statistics.new('./data/stat.yml')
     @data_stat = @stat.stats
     Rack::Response.new(render('statistics.html.erb'))
   end
@@ -59,7 +59,7 @@ class Racker
   end
 
   def win
-    @request.session[:game].save
+    @request.session[:game].save('./data/stat.yml')
     Rack::Response.new(render('win.html.erb')) do
       destroy_session
     end
