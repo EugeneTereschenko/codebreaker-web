@@ -71,7 +71,7 @@
             </div>
             <div class="form-group guess_markers_list">
               <div id="guess_marker">
-                <% if @request.session[:game_result].nil? %>
+                <%unless @request.session[:game_result] %>
                     <% 4.times do %>
                     <button type="button" class="btn btn-danger marks" disabled>x</button>
                     <% end %>
