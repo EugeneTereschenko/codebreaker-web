@@ -26,7 +26,7 @@ class Racker
     when '/win' then win
     when '/lose' then lose
     else
-      render_response('notfound.html.erb')
+      render_response('notfound.html.erb', 404)
     end
   end
 
@@ -92,7 +92,7 @@ class Racker
     ERB.new(File.read(path)).result(binding)
   end
 
-  def render_response(template)
-    Rack::Response.new(render(template))
+  def render_response(template, code = 200)
+    Rack::Response.new(render(template), code)
   end
 end

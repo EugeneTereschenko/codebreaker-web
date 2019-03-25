@@ -14,7 +14,6 @@ RSpec.describe Racker do
   context 'unknown path' do
     before { get '/unknown' }
 
-    puts Codebreaker::Game.message(:not_found)
     it { expect(last_response).to be_not_found }
     it { expect(last_response.body).to include Codebreaker::Game.message(:not_found) }
   end
