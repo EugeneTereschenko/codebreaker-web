@@ -95,17 +95,17 @@
               <%= Codebreaker::Game.message(:submit) %>
             </button>
             <% if @request.session[:game].hints.positive? %>
-            <a href="/show_hints" class="btn btn-warning btn-lg float-right" role="button">
-              <% else %>
+              <a href="/show_hints" class="btn btn-warning btn-lg float-right" role="button">
+            <% else %>
               <a href="/show_hints" class="btn btn-warning btn-lg float-right disabled" role="button">
-                <% end %>
-                <%= Codebreaker::Game.message(:show_hint) %>
-                <% unless @request.session[:array_hints].empty? %>
+            <% end %>
+            <%= Codebreaker::Game.message(:show_hint) %>
+            <% unless @request.session[:array_hints].empty? %>
                 <span class="badge badge-light">
-                  <% @request.session[:array_hints].each do |l| %>
-                  <%= l %>
-                  <% end %>
-                  <% end %>
+                    <% @request.session[:array_hints].each do |l| %>
+                      <%= l %>
+                    <% end %>
+            <% end %>
                 </span>
               </a>
           </form>

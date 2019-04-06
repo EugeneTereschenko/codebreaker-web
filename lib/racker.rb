@@ -37,6 +37,7 @@ class Racker
   end
 
   def start
+    puts @request.session[:game]
     return render_response('game.html.erb') if @request.session.key?(:game)
 
     render_response('menu.html.erb')
@@ -58,15 +59,15 @@ class Racker
 
   def win
     @request.session[:game].save('./data/stat.yml')
-    render_response('win.html.erb') do
-      destroy_session
-    end
+      Rack::Response.new(render('win.html.erb')) do
+        destroy_session
+      end
   end
 
   def lose
-    render_response('lose.html.erb') do
-      destroy_session
-    end
+    Rack::Response.new('lose.html.erb') do
+        destroy_session
+      end
   end
 
   def submit_answer
@@ -93,6 +94,6 @@ class Racker
   end
 
   def render_response(template, code = 200)
-    Rack::Response.new(render(template), code)
+    Rack::Response.new(render(template), code) 
   end
 end
