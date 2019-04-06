@@ -24,6 +24,11 @@ RSpec.describe Racker do
     it { expect(last_response).to be_ok }
     it { expect(last_response.body).to include Codebreaker::Game.message(:codebreak_year) }
     it { expect(last_response.body).to include Codebreaker::Game.message(:top_of_player) }
+    it { expect(last_response.body).to include Codebreaker::Game.message(:level_stat) }
+    it { expect(last_response.body).to include Codebreaker::Game.message(:attempt_stat) }  
+    it { expect(last_response.body).to include 'Test' }
+    it { expect(last_response.body).to include '6/24' }
+    it { expect(last_response.body).to include '3/0' }
   end
 
   context 'game' do
