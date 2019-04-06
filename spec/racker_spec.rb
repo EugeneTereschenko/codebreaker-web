@@ -34,9 +34,6 @@ RSpec.describe Racker do
   context 'game' do
     it 'makes number' do
       post '/game', number: '1234', level: 'easy', player_name: 'Test'
-      expect(last_request.params['player_name']).to be_kind_of(String)
-      expect(last_request.params['level']).to be_kind_of(String)
-      expect(last_request.params['number']).to be_kind_of(String)
       expect(last_response.body).to include last_request.params['player_name']
     end
   end

@@ -535,3 +535,19 @@
   :hints: 3
   :hints_used: 0
   :game_date: 2019/04/06 21:39:10
+- :name: Test
+  :level: easy
+  :level_num: 0
+  :attempts: 29
+  :attempts_used: 1
+  :hints: 3
+  :hints_used: 0
+  :game_date: 2019/04/06 21:42:41
+- :name: Test
+  :level: easy
+  :level_num: 0
+  :attempts: 30
+  :attempts_used: 0
+  :hints: 3
+  :hints_used: 0
+  :game_date: 2019/04/06 21:42:41
