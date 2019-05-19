@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" class="mdl-js">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="assets/favicon.ico" rel="icon">
+<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/styles.css" rel="stylesheet">
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<title>
+  <%= Codebreaker::Game.message(:codebreak) %>
+</title>
+
+<body>
+  <section id="introduction">
+    <div class="container">
+      <div class="row fill-viewport align-items-center justify-content-center">
+        <div class="col-12 col-md-6">
+          <div class="row">
+            <div class="col-md-auto">
+              <h1 class="text-white title">
+                <%= Codebreaker::Game.message(:codebreak_year) %>
+              </h1>
+            </div>
+          </div>
+          <p class="lead text-white-70">
+            <%= Codebreaker::Game.message(:hello_name) %> '
+            <%= @request.session[:game].name %>'
+            <%= Codebreaker::Game.message(:guess_number) %>
+          </p>
+          <hr class="mb-4">
+          <div class="row">
+            <div class="col button">
+              <button type="button" class="btn btn-primary" disabled>
+                <%= Codebreaker::Game.message(:level) %>
+                <span class="badge badge-light">
+                  '<%= @request.session[:game].level %>'
+                </span>
+              </button>
+            </div>
+            <div class="col text-center button">
+              <button type="button" class="btn btn-primary" disabled>
+                <%= Codebreaker::Game.message(:attempts) %>
+                <span class="badge badge-light">
+                  <%= @request.session[:game].attempts %>/
+                  <%= Codebreaker::Game::GAME_LEVELS.dig(@request.session[:game].level.to_sym, :attempts) %></span>
+              </button>
+            </div>
+
+            <div class="col button">
+              <button type="button" class="btn btn-primary float-right" disabled>
+                <%= Codebreaker::Game.message(:hints) %>
+                <%= @game_sport %>
+                <span class="badge badge-light">
+                  <%= @request.session[:game].hints %>/
+                  <%= Codebreaker::Game::GAME_LEVELS.dig(@request.session[:game].level.to_sym, :hints) %></span>
+              </button>
+            </div>
+          </div>
+          <hr class="mb-4">
+
+          <form method="post" action="/submit_answer">
+            <div class="form-group">
+              <input class="form-control guess_input" name="number" pattern="^[1-6]{4}$" required=""
+              <% if @request.session[:game].user_code.nil? %>
+              placeholder="1234"
+              <% else %>
+              placeholder = <%= @request.session[:number] %>
+              <% end %>
+              autocomplete="off">
+            </div>
+            <div class="form-group guess_markers_list">
+              <div id="guess_marker">
+                <%unless @request.session[:game_result] %>
+                    <% 4.times do %>
+                    <button type="button" class="btn btn-danger marks" disabled>x</button>
+                    <% end %>
+                <% else %>
+                    <% @request.session[:game_result].split('').each do |n| %>
+                        <% if n == '+'%> <button type="button" class="btn btn-success marks" disabled>+</button>
+                        <% elsif n == '-'%> <button type="button" class="btn btn-primary marks" disabled>-</button>
+                      <% end %>
+                    <% end %>
+                    <% for i in 0..3 do %>
+                    <% unless @request.session[:game_result].split('')[i] %><button type="button" class="btn btn-danger marks"
+                      disabled>x</button>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+            <hr class="mb-4">
+
+            <button type="submit" class="btn btn-primary btn-lg">
+              <%= Codebreaker::Game.message(:submit) %>
+            </button>
+            <% if @request.session[:game].hints.positive? %>
+              <a href="/show_hints" class="btn btn-warning btn-lg float-right" role="button">
+            <% else %>
+              <a href="/show_hints" class="btn btn-warning btn-lg float-right disabled" role="button">
+            <% end %>
+            <%= Codebreaker::Game.message(:show_hint) %>
+            <% unless @request.session[:array_hints].empty? %>
+                <span class="badge badge-light">
+                    <% @request.session[:array_hints].each do |l| %>
+                      <%= l %>
+                    <% end %>
+            <% end %>
+                </span>
+              </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
