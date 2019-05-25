@@ -65,7 +65,7 @@ class Racker
   end
 
   def lose
-    Rack::Response.new('lose.html.erb') do
+    Rack::Response.new(render('lose.html.erb')) do
         destroy_session
       end
   end

@@ -3,6 +3,8 @@
 RSpec.describe Racker do
   let(:app) { Rack::Builder.parse_file('config.ru').first }
   let(:game) { Codebreaker::Game.new }
+  let(:easy) { 'easy' }
+  let(:test) { 'Test' }
 
   context 'rules path' do
     before { get '/rules' }
@@ -41,8 +43,8 @@ RSpec.describe Racker do
   context 'submit_answer' do
     it 'sub answer' do
       game.new_game
-      game.enter_level('easy')
-      game.enter_name('Test')
+      game.enter_level(easy)
+      game.enter_name(test)
       env 'rack.session', game: game
       post '/submit_answer', number: game.secret_code.join
       expect(last_response.body).to include Codebreaker::Game.message(:won, name: 'Test')
@@ -60,8 +62,8 @@ RSpec.describe Racker do
   context 'win' do
     it 'win' do
       game.new_game
-      game.enter_level('easy')
-      game.enter_name('Test')
+      game.enter_level(easy)
+      game.enter_name(test)
       env 'rack.session', game: game
       get '/win'
       expect(last_response).to be_ok
@@ -72,8 +74,8 @@ RSpec.describe Racker do
   context 'lose' do
     it 'lose' do
       game.new_game
-      game.enter_level('easy')
-      game.enter_name('Test')
+      game.enter_level(easy)
+      game.enter_name(test)
       env 'rack.session', game: game
       get '/lose'
       expect(last_response).to be_ok
